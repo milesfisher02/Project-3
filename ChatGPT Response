@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <list>
+
+class State {
+public:
+    State(std::string name, double energyConsumption, double stateSize)
+        : name(name), energyConsumption(energyConsumption), stateSize(stateSize) {
+        calculateLandPercentage();
+    }
+
+    void calculateLandPercentage() {
+        const double efficiency = 0.15; // 15% efficiency
+        const double wattsPerSqFt = 15.0;
+        const double btusPerPanel = 51.0;
+        landPercentage = (energyConsumption * 1e12) / (stateSize * efficiency * wattsPerSqFt * btusPerPanel);
+    }
+
+    double getLandPercentage() const {
+        return landPercentage;
+    }
+
+    std::string getName() const {
+        return name;
+    }
+
+private:
+    std::string name;
+    double energyConsumption;
+    double stateSize;
+    double landPercentage;
+};
+
+bool compareStates(const State& state1, const State& state2) {
+    // Comparison function to order states by land percentage
+    return state1.getLandPercentage() < state2.getLandPercentage();
+}
+
+int main() {
+    // Create a list to store State objects
+    std::list<State> states;
+
+    // Populate the list with State objects based on the provided table
+    states.emplace_back("Texas", 13480.8, 7487580672000);
+    states.emplace_back("California", 6922.8, 4563554688000);
+    states.emplace_back("Louisiana", 4200.4, 1445216256000);
+    states.emplace_back("Florida", 4003.1, 1805265792000);
+    states.emplace_back("Illinois", 3612.9, 1614549657600);
+    states.emplace_back("Pennsylvania", 3413.0, 1283967590400);
+    states.emplace_back("Ohio", 3404.5, 1249649280000);
+    states.emplace_back("New York", 3354.2, 1520933990400);
+    states.emplace_back("Georgia", 2727.6, 1656673920000);
+    states.emplace_back("Michigan", 2610.6, 2696287334400);
+
+    // Sort the list based on land percentage
+    states.sort(compareStates);
+
+    // Display the ordered listing of states
+    std::cout << "States ordered by land percentage:" << std::endl;
+    for (const State& state : states) {
+        std::cout << state.getName() << " - " << state.getLandPercentage() << "%" << std::endl;
+    }
+
+    return 0;
+}
