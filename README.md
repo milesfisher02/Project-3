@@ -1,7 +1,7 @@
 # Project-3
 CS 250 Programming Assignment #3
 
-ChatGPT's code appears to be correct. It displays the states with their numbers and percentages. My code had percentages that were impossible because they were above 100%ChatGPT used one file to program the code while I seperated mine into main and a state.h and state.cpp file.
+ChatGPT's code appears to be correct. It displays the states with their numbers and percentages. My code had percentages that were impossible because they were above 100%. ChatGPT used one file to program the code while I seperated mine into main and a state.h and state.cpp file.
 
 ChatGPT used caluclated it's land percentage using 
 
